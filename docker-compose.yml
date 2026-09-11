@@ -1,0 +1,17 @@
+services:
+  appdomicilios-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: appdomicilios-api
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      APPDOMICILIOS_DB_HOST: ${APPDOMICILIOS_DB_HOST:?set in .env}
+      APPDOMICILIOS_DB_PORT: ${APPDOMICILIOS_DB_PORT:?set in .env}
+      APPDOMICILIOS_DB_NAME: ${APPDOMICILIOS_DB_NAME:?set in .env}
+      APPDOMICILIOS_DB_USER: ${APPDOMICILIOS_DB_USER:?set in .env}
+      APPDOMICILIOS_DB_PASS: ${APPDOMICILIOS_DB_PASS:?set in .env}
+      TZ: America/Bogota
+    volumes:
+      - ./app:/var/www/html
